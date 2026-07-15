@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import '../index.css';
+import logoImg from '../assets/فخم.png';
 
 export default function Home() {
   const { t, i18n } = useTranslation();
@@ -114,7 +115,7 @@ export default function Home() {
       <header className={`site-header`} id="siteHeader">
         <div className="header-inner">
             <a href="#" className="header-logo" >
-                <img src="/فخم.jfif" alt="فخم" />
+                <img src={logoImg} alt="فخم" />
                 <span className="header-logo-text">فخم</span>
             </a>
             <nav className="header-nav">
