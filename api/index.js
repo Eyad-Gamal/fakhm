@@ -12,11 +12,45 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
+<<<<<<< HEAD
 // Import routes
 const uploadRoutes = require('./routes/upload.routes');
 
 // Register API routes
 app.use('/api', uploadRoutes);
+=======
+// Cloudinary Configuration
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('cloudinary').v2;
+
+// The CLOUDINARY_URL is automatically picked up from process.env by the cloudinary SDK
+// but we can ensure it's loaded explicitly if needed, although standard practice is:
+// cloudinary.config() will automatically read process.env.CLOUDINARY_URL
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'fakhem',
+    allowed_formats: ['jpg', 'png', 'jpeg', 'webp', 'jfif', 'svg']
+  }
+});
+const upload = multer({ storage: storage });
+
+// Upload Endpoint - Uploads to Cloudinary
+app.post('/api/upload', upload.array('images', 10), (req, res) => {
+    try {
+        if (!req.files || req.files.length === 0) {
+            return res.status(400).json({ message: 'No files uploaded' });
+        }
+        
+        const filePaths = req.files.map(file => file.path);
+        
+        res.json({ filePaths });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+>>>>>>> d1b128a0f5b568b4c112ca812cd6cb3ec886b324
 
 // MongoDB Connection
 const MONGO_URI = process.env.MONGO_URI;
@@ -32,7 +66,71 @@ if (!MONGO_URI) {
 // Mongoose Models
 // ==========================================
 
+<<<<<<< HEAD
 const { Product, Category, Service, Hero, Settings } = require('./models');
+=======
+const ImageSchema = new mongoose.Schema({
+    src: String,
+    overlay: {
+        text: String,
+        bgColor: String,
+        bgOpacity: Number,
+        textColor: String,
+        fontSize: Number,
+        position: String
+    }
+}, { _id: false });
+
+const ProductSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    category: { type: String, default: '' },
+    badge: { type: String, default: '' },
+    images: [ImageSchema],
+    sizes: [{
+        size: String,
+        price: Number
+    }],
+    order: { type: Number, default: 0 }
+});
+
+const CategorySchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    order: { type: Number, default: 0 }
+});
+
+const ServiceSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    desc: { type: String, required: true },
+    icon: { type: String, default: '' },
+    images: [String],
+    isCustom: { type: Boolean, default: true },
+    order: { type: Number, default: 0 }
+});
+
+const HeroSchema = new mongoose.Schema({
+    circles: [String],
+    title: String,
+    subtitle: String,
+    badge: String,
+    ctaText: String
+});
+
+const SettingsSchema = new mongoose.Schema({
+    whatsapp: String,
+    instagram: String,
+    facebook: String,
+    footerText: String,
+    copyrightText: String,
+    premiumThreshold: Number,
+    logo: String
+});
+
+const Product = mongoose.model('Product', ProductSchema);
+const Category = mongoose.model('Category', CategorySchema);
+const Service = mongoose.model('Service', ServiceSchema);
+const Hero = mongoose.model('Hero', HeroSchema);
+const Settings = mongoose.model('Settings', SettingsSchema);
+>>>>>>> d1b128a0f5b568b4c112ca812cd6cb3ec886b324
 
 // ==========================================
 // API Routes

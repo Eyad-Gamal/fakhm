@@ -67,6 +67,7 @@ export default function Home() {
 
   return (
     <>
+<<<<<<< HEAD
       <header className="site-header" id="siteHeader">
           <div className="header-inner">
               <a href="#" className="header-logo">
@@ -111,6 +112,28 @@ export default function Home() {
                     <i className="fa-solid fa-magnifying-glass search-icon"></i>
                     <input type="text" className="search-input" placeholder="ابحث عن عطرك المفضل..." autoComplete="off" />
                 </div>
+=======
+      
+    <header className="site-header" id="siteHeader">
+        <div className="header-inner">
+            <a href="#" className="header-logo" >
+                <img src={settings.logo || "/فخم.jfif"} alt="فخم" />
+                <span className="header-logo-text">فخم</span>
+            </a>
+            <nav className="header-nav">
+                <a href="#hero" className="nav-link active">الرئيسية</a>
+                <a href="#products" className="nav-link">العطور</a>
+                <a href="#services" className="nav-link">خدماتنا</a>
+                <a href="#footer" className="nav-link">تواصل معنا</a>
+            </nav>
+            <div >
+                <button className="header-search-btn"  aria-label="بحث">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button className="mobile-menu-btn"  aria-label="القائمة">
+                    <i className="fa-solid fa-bars"></i>
+                </button>
+>>>>>>> d1b128a0f5b568b4c112ca812cd6cb3ec886b324
             </div>
         </div>
       )}
@@ -127,6 +150,7 @@ export default function Home() {
                   <div className="hero-circle sm"><img src="/WhatsApp Image 2026-4407-13 at 4.05.03 PM.jpeg" alt="إرجاع مجاني" /></div>
               </div>
 
+<<<<<<< HEAD
               <div className="hero-badge"><i className="fa-solid fa-gem"></i> {hero.badge || 'المجموعة الحصرية'}</div>
               <h1 className="hero-title">{hero.title || 'عطور فاخرة بجودة استثنائية'}</h1>
               <p className="hero-subtitle">{hero.subtitle || 'اكتشف مجموعتنا الحصرية من أرقى العطور الرجالية المصنوعة بأفضل المكونات وأعلى تركيز لثبات يدوم طوال اليوم'}</p>
@@ -182,6 +206,102 @@ export default function Home() {
             <div className="modal-container" style={{ maxHeight: '90vh', overflowY: 'auto' }}>
                 <button className="modal-close" aria-label="إغلاق" onClick={closeProductModal}>
                     <i className="fa-solid fa-xmark"></i>
+=======
+    <div className="search-overlay" id="searchOverlay">
+        <button className="search-close" ><i className="fa-solid fa-xmark"></i></button>
+        <div className="search-container">
+            <div className="search-input-wrapper">
+                <i className="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" className="search-input" id="searchInput" placeholder="ابحث عن عطرك المفضل..."
+                    autoComplete="off"  />
+            </div>
+            <div className="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <section className="hero" id="hero">
+        <div className="hero-bg"></div>
+        <div className="container hero-content">
+            <div className="hero-text">
+                <span className="badge">{hero.badge || "المجموعة الحصرية"}</span>
+                <h1>{hero.title ? hero.title.split('\n').map((line, i) => <React.Fragment key={i}>{line}<br/></React.Fragment>) : <>عطور فاخرة<br/>بجودة استثنائية</>}</h1>
+                <p>{hero.subtitle || "اكتشف مجموعتنا الحصرية من أرقى العطور الرجالية المصنوعة بأفضل المكونات وأعلى تركيز لثبات يدوم طوال اليوم"}</p>
+                <div className="hero-actions">
+                    <a href="#products" className="btn btn-primary btn-lg">{hero.ctaText || "تصفح المجموعة"} <i className="fa-solid fa-arrow-left"></i></a>
+                    <a href="#services" className="btn btn-secondary btn-lg">خدماتنا الخاصة</a>
+                </div>
+            </div>
+            
+            <div className="hero-visual">
+                <div className="hero-circle sm"><img src={hero.circles?.[3] || "/WhatsApp Image 2026-07-13 at 4.05.02 PM.jpeg"} alt="لا يسبب الحساسية" /></div>
+                <div className="hero-circle md"><img src={hero.circles?.[1] || "/WhatsApp Image 2026-07-13 at 422.05.03 PM.jpeg"} alt="ضمان مدى الحياة" /></div>
+                <div className="hero-logo-frame">
+                    <img src={settings.logo || "/فخم.png"} alt="فخم - عطور فاخرة" className="hero-logo" />
+                </div>
+                <div className="hero-circle md"><img src={hero.circles?.[2] || "/WhatsApp Image 2026-07-13 at12 4.05.02 PM.jpeg"} alt="أعلى تركيز ثبات قوي" /></div>
+                <div className="hero-circle sm"><img src={hero.circles?.[0] || "/WhatsApp Image 2026-4407-13 at 4.05.03 PM.jpeg"} alt="إرجاع مجاني" /></div>
+            </div>
+        </div>
+        <a href="#products" className="scroll-down">
+            <i className="fa-solid fa-chevron-down"></i>
+        </a>
+    </section>
+
+    
+    <section className="products-section" id="products">
+        <div className="section-title-wrapper animate-in">
+            <div className="section-divider"></div>
+        </div>
+        <div className="products-grid" id="productsGrid"></div>
+    </section>
+
+    
+    <section className="services-section" id="services">
+        <div className="section-title-wrapper animate-in">
+            <span className="section-tag">خدمات مميزة</span>
+            <h2 className="section-title">خدماتنا الخاصة</h2>
+            <p className="section-subtitle">نقدم لك خدمات حصرية لتجربة عطرية فريدة من نوعها</p>
+            <div className="section-divider"></div>
+        </div>
+        <div className="services-grid" id="servicesGrid"></div>
+    </section>
+
+    
+    <div className="modal-overlay" id="productModal">
+        <div className="modal-container">
+            <button className="modal-close"  aria-label="إغلاق"><i
+                    className="fa-solid fa-xmark"></i></button>
+
+            <div className="modal-image-section">
+                <img id="modalImg" className="modal-main-image" alt="" />
+                <div className="modal-thumbs" id="thumbContainer"></div>
+            </div>
+
+            <div className="modal-info-section">
+                <h2 id="modalTitle" className="modal-product-name"></h2>
+                <p className="modal-product-tagline">عطر فاخر بجودة استثنائية من فخم</p>
+
+                <div id="customArea"></div>
+
+                <div id="sizeOptions">
+                    <p className="modal-size-label">اختر الحجم</p>
+                    <div className="modal-size-options" id="sizeBtnContainer"></div>
+                </div>
+
+                <div className="modal-price-wrapper">
+                    <p className="modal-price-label">السعر</p>
+                    <p id="modalPrice" className="modal-price">0 <span className="currency">ج.م</span></p>
+                </div>
+
+                <div className="modal-phone-wrapper">
+                    <i className="fa-solid fa-phone modal-phone-icon"></i>
+                    <input type="tel" id="phone" className="modal-phone" placeholder="رقم الهاتف للتواصل" maxlength="11" />
+                </div>
+
+                <button  className="modal-order-btn">
+                    <i className="fa-brands fa-whatsapp"></i>
+                    تأكيد الأوردر عبر واتساب
+>>>>>>> d1b128a0f5b568b4c112ca812cd6cb3ec886b324
                 </button>
 
                 <div className="modal-image-section">
@@ -247,6 +367,7 @@ export default function Home() {
           </div>
       </section>
 
+<<<<<<< HEAD
       <footer className="site-footer" id="footer">
           <div className="footer-inner">
               <div className="footer-brand">
@@ -256,6 +377,19 @@ export default function Home() {
                   </div>
                   <p className="footer-brand-desc">{settings.footerText || 'متجر متخصص في العطور الفاخرة الرجالية. نقدم لك أرقى العطور العالمية بأفضل جودة وثبات وبأسعار تنافسية مع التوصيل لجميع المحافظات.'}</p>
               </div>
+=======
+    
+    <footer className="site-footer" id="footer">
+        <div className="footer-inner">
+            <div className="footer-brand">
+                <div className="footer-brand-logo">
+                    <img src={settings.logo || "/فخم.jfif"} alt="فخم" />
+                    <span>فخم</span>
+                </div>
+                <p className="footer-brand-desc">متجر متخصص في العطور الفاخرة الرجالية. نقدم لك أرقى العطور العالمية بأفضل
+                    جودة وثبات وبأسعار تنافسية مع التوصيل لجميع المحافظات.</p>
+            </div>
+>>>>>>> d1b128a0f5b568b4c112ca812cd6cb3ec886b324
 
               <div className="footer-section">
                   <h3>روابط سريعة</h3>

@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 
+<<<<<<< HEAD
 /**
  * Validate that all required environment variables are present
  * @throws {Error} If any required environment variable is missing
@@ -51,6 +52,27 @@ app.get(/^.*$/, (req, res) => {
         res.send(html);
     } catch (e) {
         res.status(404).send('Not found');
+=======
+// Determine if we should serve 'dist' (React build) or 'public' (static assets)
+const distPath = path.join(__dirname, 'dist');
+const publicPath = path.join(__dirname, 'public');
+
+// Serve Vite build output if it exists
+if (fs.existsSync(distPath)) {
+    app.use(express.static(distPath));
+}
+
+// Serve public directory for raw assets (like images)
+app.use(express.static(publicPath));
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads'))); // Keep for backward compatibility with old local files
+
+// Fallback to React's index.html for unknown routes (SPA behavior)
+app.get(/^.*$/, (req, res) => {
+    if (fs.existsSync(distPath)) {
+        res.sendFile(path.join(distPath, 'index.html'));
+    } else {
+        res.sendFile(path.join(publicPath, 'index.html'));
+>>>>>>> d1b128a0f5b568b4c112ca812cd6cb3ec886b324
     }
 });
 
