@@ -3,6 +3,8 @@ import axios from 'axios';
 import '../admin.css';
 
 export default function Admin() {
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('adminAuth') === 'true');
+  const [passwordInput, setPasswordInput] = useState('');
   const [activeTab, setActiveTab] = useState('products');
   
   const [products, setProducts] = useState([]);
@@ -139,8 +141,49 @@ export default function Admin() {
     { id: 'settings', label: 'الإعدادات', icon: 'fa-gear' }
   ];
 
+  if (!isAuthenticated) {
+    return (
+      <div style={{minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', background:'var(--bg-darkest)'}}>
+         <div style={{background:'var(--bg-card)', padding:'40px', borderRadius:'var(--radius-lg)', border:'1px solid var(--border-gold)', textAlign:'center', width:'90%', maxWidth:'400px'}}>
+            <i className="fa-solid fa-lock" style={{fontSize:'3rem', color:'var(--gold)', marginBottom:'20px'}}></i>
+            <h2 style={{color:'var(--gold)', marginBottom:'20px'}}>لوحة تحكم فخم</h2>
+            <input 
+              type="password" 
+              className="form-input" 
+              placeholder="أدخل كلمة المرور" 
+              value={passwordInput} 
+              onChange={e => setPasswordInput(e.target.value)}
+              onKeyDown={e => {
+                if(e.key === 'Enter') {
+                  if(passwordInput === '909035') {
+                    localStorage.setItem('adminAuth', 'true');
+                    setIsAuthenticated(true);
+                  } else {
+                    alert('كلمة المرور خاطئة');
+                  }
+                }
+              }}
+              style={{marginBottom:'20px', textAlign:'center', letterSpacing:'5px', fontSize:'1.2rem'}}
+            />
+            <button 
+              className="btn btn-primary" 
+              style={{width:'100%'}}
+              onClick={() => {
+                if(passwordInput === '909035') {
+                  localStorage.setItem('adminAuth', 'true');
+                  setIsAuthenticated(true);
+                } else {
+                  alert('كلمة المرور خاطئة');
+                }
+              }}
+            >تسجيل الدخول</button>
+         </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="admin-layout">
+    <div className="admin-layout" dir="rtl">
       <aside className="sidebar">
         <a href="/" className="sidebar-brand">
             <img src="/فخم.jfif" alt="فخم" />
