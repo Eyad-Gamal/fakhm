@@ -13,21 +13,31 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Image Upload Configuration using Multer (Memory Storage for Vercel/Base64)
-const storage = multer.memoryStorage();
+// Cloudinary Configuration
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('cloudinary').v2;
+
+// The CLOUDINARY_URL is automatically picked up from process.env by the cloudinary SDK
+// but we can ensure it's loaded explicitly if needed, although standard practice is:
+// cloudinary.config() will automatically read process.env.CLOUDINARY_URL
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'fakhem',
+    allowed_formats: ['jpg', 'png', 'jpeg', 'webp', 'jfif', 'svg']
+  }
+});
 const upload = multer({ storage: storage });
 
-// Upload Endpoint - Converts image to Base64
+// Upload Endpoint - Uploads to Cloudinary
 app.post('/api/upload', upload.array('images', 10), (req, res) => {
     try {
         if (!req.files || req.files.length === 0) {
             return res.status(400).json({ message: 'No files uploaded' });
         }
         
-        const filePaths = req.files.map(file => {
-            const b64 = Buffer.from(file.buffer).toString('base64');
-            return `data:${file.mimetype};base64,${b64}`;
-        });
+        const filePaths = req.files.map(file => file.path);
         
         res.json({ filePaths });
     } catch (err) {
@@ -101,7 +111,8 @@ const SettingsSchema = new mongoose.Schema({
     facebook: String,
     footerText: String,
     copyrightText: String,
-    premiumThreshold: Number
+    premiumThreshold: Number,
+    logo: String
 });
 
 const Product = mongoose.model('Product', ProductSchema);

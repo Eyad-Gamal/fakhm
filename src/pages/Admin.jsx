@@ -4,6 +4,9 @@ import '../admin.css';
 import Dashboard from '../components/admin/Dashboard';
 import ProductsManager from '../components/admin/ProductsManager';
 import CategoriesManager from '../components/admin/CategoriesManager';
+import HeroManager from '../components/admin/HeroManager';
+import SettingsManager from '../components/admin/SettingsManager';
+import ServicesManager from '../components/admin/ServicesManager';
 
 export default function Admin() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -99,9 +102,9 @@ export default function Admin() {
             {activeTab === 'dashboard' && <Dashboard products={products} categories={categories} services={services} />}
             {activeTab === 'products' && <ProductsManager products={products} categories={categories} reloadData={fetchData} />}
             {activeTab === 'categories' && <CategoriesManager categories={categories} products={products} reloadData={fetchData} />}
-            {activeTab === 'hero' && <div className="page-section active"><p>قسم الهيرو قيد البرمجة...</p></div>}
-            {activeTab === 'services' && <div className="page-section active"><p>الخدمات قيد البرمجة...</p></div>}
-            {activeTab === 'settings' && <div className="page-section active"><p>الإعدادات قيد البرمجة...</p></div>}
+            {activeTab === 'hero' && <HeroManager hero={hero} reloadData={fetchData} />}
+            {activeTab === 'services' && <ServicesManager services={services} reloadData={fetchData} />}
+            {activeTab === 'settings' && <SettingsManager settings={settings} reloadData={fetchData} />}
           </div>
         </div>
       </div>

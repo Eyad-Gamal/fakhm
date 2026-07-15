@@ -37,7 +37,7 @@ export default function Home() {
     <header className="site-header" id="siteHeader">
         <div className="header-inner">
             <a href="#" className="header-logo" >
-                <img src="/فخم.jfif" alt="فخم" />
+                <img src={settings.logo || "/فخم.jfif"} alt="فخم" />
                 <span className="header-logo-text">فخم</span>
             </a>
             <nav className="header-nav">
@@ -67,44 +67,44 @@ export default function Home() {
         <a href="#footer" >تواصل معنا</a>
     </div>
 
-    
     <div className="search-overlay" id="searchOverlay">
         <button className="search-close" ><i className="fa-solid fa-xmark"></i></button>
         <div className="search-container">
             <div className="search-input-wrapper">
                 <i className="fa-solid fa-magnifying-glass search-icon"></i>
                 <input type="text" className="search-input" id="searchInput" placeholder="ابحث عن عطرك المفضل..."
-                    autocomplete="off"  />
+                    autoComplete="off"  />
             </div>
             <div className="search-results" id="searchResults"></div>
         </div>
     </div>
 
-    
     <section className="hero" id="hero">
-        <div className="hero-content">
-
-            
-            <div className="hero-showcase">
-                <div className="hero-circle sm"><img src="WhatsApp Image 2026-07-13 at 4.05.02 PM.jpeg" alt="لا يسبب الحساسية" /></div>
-                <div className="hero-circle md"><img src="WhatsApp Image 2026-07-13 at 422.05.03 PM.jpeg" alt="ضمان مدى الحياة" /></div>
-                <div className="hero-logo-frame">
-                    <img src="/فخم.png" alt="فخم - عطور فاخرة" className="hero-logo" />
+        <div className="hero-bg"></div>
+        <div className="container hero-content">
+            <div className="hero-text">
+                <span className="badge">{hero.badge || "المجموعة الحصرية"}</span>
+                <h1>{hero.title ? hero.title.split('\n').map((line, i) => <React.Fragment key={i}>{line}<br/></React.Fragment>) : <>عطور فاخرة<br/>بجودة استثنائية</>}</h1>
+                <p>{hero.subtitle || "اكتشف مجموعتنا الحصرية من أرقى العطور الرجالية المصنوعة بأفضل المكونات وأعلى تركيز لثبات يدوم طوال اليوم"}</p>
+                <div className="hero-actions">
+                    <a href="#products" className="btn btn-primary btn-lg">{hero.ctaText || "تصفح المجموعة"} <i className="fa-solid fa-arrow-left"></i></a>
+                    <a href="#services" className="btn btn-secondary btn-lg">خدماتنا الخاصة</a>
                 </div>
-                <div className="hero-circle md"><img src="WhatsApp Image 2026-07-13 at12 4.05.02 PM.jpeg" alt="أعلى تركيز ثبات قوي" /></div>
-                <div className="hero-circle sm"><img src="WhatsApp Image 2026-4407-13 at 4.05.03 PM.jpeg" alt="إرجاع مجاني" /></div>
             </div>
-
-            <div className="hero-badge"><i className="fa-solid fa-gem" ></i>المجموعة الحصرية</div>
-            <h1 className="hero-title">عطور فاخرة<br />بجودة استثنائية</h1>
-            <p className="hero-subtitle">اكتشف مجموعتنا الحصرية من أرقى العطور الرجالية المصنوعة بأفضل المكونات وأعلى تركيز
-                لثبات يدوم طوال اليوم</p>
-            <a href="#products" className="hero-cta">
-                تصفح المجموعة
-                <i className="fa-solid fa-arrow-down"></i>
-            </a>
-
+            
+            <div className="hero-visual">
+                <div className="hero-circle sm"><img src={hero.circles?.[3] || "/WhatsApp Image 2026-07-13 at 4.05.02 PM.jpeg"} alt="لا يسبب الحساسية" /></div>
+                <div className="hero-circle md"><img src={hero.circles?.[1] || "/WhatsApp Image 2026-07-13 at 422.05.03 PM.jpeg"} alt="ضمان مدى الحياة" /></div>
+                <div className="hero-logo-frame">
+                    <img src={settings.logo || "/فخم.png"} alt="فخم - عطور فاخرة" className="hero-logo" />
+                </div>
+                <div className="hero-circle md"><img src={hero.circles?.[2] || "/WhatsApp Image 2026-07-13 at12 4.05.02 PM.jpeg"} alt="أعلى تركيز ثبات قوي" /></div>
+                <div className="hero-circle sm"><img src={hero.circles?.[0] || "/WhatsApp Image 2026-4407-13 at 4.05.03 PM.jpeg"} alt="إرجاع مجاني" /></div>
+            </div>
         </div>
+        <a href="#products" className="scroll-down">
+            <i className="fa-solid fa-chevron-down"></i>
+        </a>
     </section>
 
     
@@ -189,7 +189,7 @@ export default function Home() {
         <div className="footer-inner">
             <div className="footer-brand">
                 <div className="footer-brand-logo">
-                    <img src="/فخم.jfif" alt="فخم" />
+                    <img src={settings.logo || "/فخم.jfif"} alt="فخم" />
                     <span>فخم</span>
                 </div>
                 <p className="footer-brand-desc">متجر متخصص في العطور الفاخرة الرجالية. نقدم لك أرقى العطور العالمية بأفضل
