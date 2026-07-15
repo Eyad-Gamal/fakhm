@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Fakhem Perfumes Website with Backend",
   "main": "server.js",
+  "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "concurrently \"vite\" \"nodemon server.js\"",
-    "test": "jest",
+    "start": "node server/server.js",
+    "dev": "concurrently \"vite\" \"nodemon server/server.js\"",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -15,29 +15,22 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.18.1",
-<<<<<<< HEAD
     "cloudinary": "^2.10.0",
-=======
-    "cloudinary": "^1.41.3",
->>>>>>> d1b128a0f5b568b4c112ca812cd6cb3ec886b324
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mongodb": "^7.5.0",
+    "i18next": "^26.3.6",
     "mongoose": "^9.7.4",
     "multer": "^2.2.0",
-    "multer-storage-cloudinary": "^4.0.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-i18next": "^17.0.9",
     "react-router-dom": "^7.18.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.7.0",
     "concurrently": "^10.0.3",
-    "fast-check": "^4.9.0",
-    "jest": "^30.4.2",
     "nodemon": "^3.1.14",
-    "supertest": "^7.2.2",
     "vite": "^6.4.3"
   }
 }

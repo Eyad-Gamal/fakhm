@@ -1093,3 +1093,27 @@
         .empty-state p {
             margin-bottom: 20px;
         }
+/* Table Styles added for React Admin */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+th, td {
+  padding: 15px;
+  text-align: right;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}
+th {
+  background: var(--bg-dark);
+  color: var(--gold);
+  font-weight: 700;
+}
+tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
