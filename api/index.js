@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const multer = require('multer');
 
 dotenv.config();
 
@@ -13,27 +12,11 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Image Upload Configuration using Multer (Memory Storage for Vercel/Base64)
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+// Import routes
+const uploadRoutes = require('./routes/upload.routes');
 
-// Upload Endpoint - Converts image to Base64
-app.post('/api/upload', upload.array('images', 10), (req, res) => {
-    try {
-        if (!req.files || req.files.length === 0) {
-            return res.status(400).json({ message: 'No files uploaded' });
-        }
-        
-        const filePaths = req.files.map(file => {
-            const b64 = Buffer.from(file.buffer).toString('base64');
-            return `data:${file.mimetype};base64,${b64}`;
-        });
-        
-        res.json({ filePaths });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
+// Register API routes
+app.use('/api', uploadRoutes);
 
 // MongoDB Connection
 const MONGO_URI = process.env.MONGO_URI;
@@ -49,66 +32,7 @@ if (!MONGO_URI) {
 // Mongoose Models
 // ==========================================
 
-const ImageSchema = new mongoose.Schema({
-    src: String,
-    overlay: {
-        text: String,
-        bgColor: String,
-        bgOpacity: Number,
-        textColor: String,
-        fontSize: Number,
-        position: String
-    }
-}, { _id: false });
-
-const ProductSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    category: { type: String, default: '' },
-    badge: { type: String, default: '' },
-    images: [ImageSchema],
-    sizes: [{
-        size: String,
-        price: Number
-    }],
-    order: { type: Number, default: 0 }
-});
-
-const CategorySchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    order: { type: Number, default: 0 }
-});
-
-const ServiceSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    desc: { type: String, required: true },
-    icon: { type: String, default: '' },
-    images: [String],
-    isCustom: { type: Boolean, default: true },
-    order: { type: Number, default: 0 }
-});
-
-const HeroSchema = new mongoose.Schema({
-    circles: [String],
-    title: String,
-    subtitle: String,
-    badge: String,
-    ctaText: String
-});
-
-const SettingsSchema = new mongoose.Schema({
-    whatsapp: String,
-    instagram: String,
-    facebook: String,
-    footerText: String,
-    copyrightText: String,
-    premiumThreshold: Number
-});
-
-const Product = mongoose.model('Product', ProductSchema);
-const Category = mongoose.model('Category', CategorySchema);
-const Service = mongoose.model('Service', ServiceSchema);
-const Hero = mongoose.model('Hero', HeroSchema);
-const Settings = mongoose.model('Settings', SettingsSchema);
+const { Product, Category, Service, Hero, Settings } = require('./models');
 
 // ==========================================
 // API Routes
@@ -264,6 +188,21 @@ app.put('/api/settings', async (req, res) => {
         }
         res.json(settings);
     } catch (err) { res.status(400).json({ message: err.message }); }
+});
+
+// Global error handler middleware for consistent error responses
+app.use((error, req, res, next) => {
+    console.error('Global error handler:', error);
+
+    // Default error response
+    const statusCode = error.statusCode || 500;
+    const message = error.message || 'An unexpected error occurred';
+
+    res.status(statusCode).json({
+        success: false,
+        message: message,
+        error: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
 });
 
 // Export app for Serverless
