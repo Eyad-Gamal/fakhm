@@ -37,7 +37,7 @@ export default function Home() {
     <header className="site-header" id="siteHeader">
         <div className="header-inner">
             <a href="#" className="header-logo" >
-                <img src="فخم.jfif" alt="فخم" />
+                <img src="/فخم.jfif" alt="فخم" />
                 <span className="header-logo-text">فخم</span>
             </a>
             <nav className="header-nav">
@@ -89,7 +89,7 @@ export default function Home() {
                 <div className="hero-circle sm"><img src="WhatsApp Image 2026-07-13 at 4.05.02 PM.jpeg" alt="لا يسبب الحساسية" /></div>
                 <div className="hero-circle md"><img src="WhatsApp Image 2026-07-13 at 422.05.03 PM.jpeg" alt="ضمان مدى الحياة" /></div>
                 <div className="hero-logo-frame">
-                    <img src="فخم.png" alt="فخم - عطور فاخرة" className="hero-logo" />
+                    <img src="/فخم.png" alt="فخم - عطور فاخرة" className="hero-logo" />
                 </div>
                 <div className="hero-circle md"><img src="WhatsApp Image 2026-07-13 at12 4.05.02 PM.jpeg" alt="أعلى تركيز ثبات قوي" /></div>
                 <div className="hero-circle sm"><img src="WhatsApp Image 2026-4407-13 at 4.05.03 PM.jpeg" alt="إرجاع مجاني" /></div>
@@ -189,7 +189,7 @@ export default function Home() {
         <div className="footer-inner">
             <div className="footer-brand">
                 <div className="footer-brand-logo">
-                    <img src="فخم.jfif" alt="فخم" />
+                    <img src="/فخم.jfif" alt="فخم" />
                     <span>فخم</span>
                 </div>
                 <p className="footer-brand-desc">متجر متخصص في العطور الفاخرة الرجالية. نقدم لك أرقى العطور العالمية بأفضل
