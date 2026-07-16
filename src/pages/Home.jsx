@@ -325,7 +325,7 @@ export default function Home() {
           <div className="footer-inner">
               <div className="footer-brand">
                   <div className="footer-brand-logo">
-                      <img src="/فخم.jfif" alt="فخم" />
+                      <img src="../assets/فخم.png" alt="فخم" />
                       <span>فخم</span>
                   </div>
                   <p className="footer-brand-desc">{settings?.footerText?.[lang] || 'متجر متخصص في العطور الفاخرة الرجالية. نقدم لك أرقى العطور العالمية بأفضل جودة وثبات وبأسعار تنافسية مع التوصيل لجميع المحافظات.'}</p>
