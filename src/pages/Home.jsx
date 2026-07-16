@@ -169,7 +169,7 @@ export default function Home() {
                   <div className="hero-circle sm"><img src={hero?.circles?.[0]?.src || "/WhatsApp Image 2026-07-13 at 4.05.02 PM.jpeg"} alt={hero?.circles?.[0]?.alt || "لا يسبب الحساسية"} /></div>
                   <div className="hero-circle md"><img src={hero?.circles?.[1]?.src || "/WhatsApp Image 2026-07-13 at 422.05.03 PM.jpeg"} alt={hero?.circles?.[1]?.alt || "ضمان مدى الحياة"} /></div>
                   <div className="hero-logo-frame">
-                      <img src={hero?.circles?.[2]?.src || "/فخم.png"} alt={hero?.circles?.[2]?.alt || "فخم - عطور فاخرة"} className="hero-logo" />
+                      <img src={hero?.circles?.[2]?.src || "../src/assets/فخم.png"} alt={hero?.circles?.[2]?.alt || "فخم - عطور فاخرة"} className="hero-logo" />
                   </div>
                   <div className="hero-circle md"><img src={hero?.circles?.[3]?.src || "/WhatsApp Image 2026-07-13 at12 4.05.02 PM.jpeg"} alt={hero?.circles?.[3]?.alt || "أعلى تركيز ثبات قوي"} /></div>
                   <div className="hero-circle sm"><img src={hero?.circles?.[4]?.src || "/WhatsApp Image 2026-4407-13 at 4.05.03 PM.jpeg"} alt={hero?.circles?.[4]?.alt || "إرجاع مجاني"} /></div>
@@ -199,7 +199,7 @@ export default function Home() {
                       <div className="product-badge">{p.badge[lang]}</div>
                   )}
                   <div className="product-card-image-wrapper">
-                      <img src={p.images?.[0]?.src || '/فخم.jfif'} alt={p.name[lang] || p.name.ar} />
+                      <img src={p.images?.[0]?.src || '../src/assets/فخم.png'} alt={p.name[lang] || p.name.ar} />
                   </div>
                   <h3 className="product-card-name">{p.name[lang] || p.name.ar}</h3>
                   <div className="product-card-price">
@@ -239,7 +239,7 @@ export default function Home() {
                       className="fa-solid fa-xmark"></i></button>
 
               <div className="modal-image-section">
-                  <img id="modalImg" className="modal-main-image" src={selectedProduct.images?.[0]?.src || '/فخم.jfif'} alt="" />
+                  <img id="modalImg" className="modal-main-image" src={selectedProduct.images?.[0]?.src || '../src/assets/فخم.png'} alt="" />
                   <div className="modal-thumbs" id="thumbContainer">
                       {selectedProduct.images?.map((img, idx) => (
                         <img key={idx} src={img.src} className="modal-thumb" alt="" onClick={(e) => {document.getElementById('modalImg').src = img.src}} />
@@ -325,7 +325,7 @@ export default function Home() {
           <div className="footer-inner">
               <div className="footer-brand">
                   <div className="footer-brand-logo">
-                      <img src="/فخم.jfif" alt="فخم" />
+                      <img src="../src/assets/فخم.png" alt="فخم" />
                       <span>فخم</span>
                   </div>
                   <p className="footer-brand-desc">{settings?.footerText?.[lang] || 'متجر متخصص في العطور الفاخرة الرجالية. نقدم لك أرقى العطور العالمية بأفضل جودة وثبات وبأسعار تنافسية مع التوصيل لجميع المحافظات.'}</p>
