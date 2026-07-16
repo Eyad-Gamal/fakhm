@@ -36,7 +36,13 @@ const resources = {
       "settings": "الإعدادات",
       "currency": "ج.م",
       "starts_from": "يبدأ من",
-      "no_category": "بدون تصنيف"
+      "no_category": "بدون تصنيف",
+      "products_title": "اكتشف مجموعتنا الحصرية من أرقى العطور الرجالية",
+      "new_order": "طلب جديد:",
+      "size": "الحجم:",
+      "final_price": "السعر النهائي:",
+      "phone": "الهاتف:",
+      "discount_code": "كود الخصم:"
     }
   },
   en: {
@@ -73,7 +79,13 @@ const resources = {
       "settings": "Settings",
       "currency": "EGP",
       "starts_from": "Starts from",
-      "no_category": "No Category"
+      "no_category": "No Category",
+      "products_title": "Discover our exclusive collection of the finest men's perfumes",
+      "new_order": "New Order:",
+      "size": "Size:",
+      "final_price": "Final Price:",
+      "phone": "Phone:",
+      "discount_code": "Discount Code:"
     }
   }
 };

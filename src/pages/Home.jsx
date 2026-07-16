@@ -100,8 +100,8 @@ export default function Home() {
     }
     const finalPrice = discountInfo ? (selectedSize.price - discountInfo.discountAmount) : selectedSize.price;
     const prodName = selectedProduct.name[lang] || selectedProduct.name.ar;
-    let msg = `طلب جديد: ${prodName} - الحجم: ${selectedSize.size} - السعر النهائي: ${finalPrice} ${t('currency')} - الهاتف: ${phone}`;
-    if (discountInfo) msg += ` - كود الخصم: ${discountInfo.promoCode}`;
+    let msg = `${t('new_order')} ${prodName} - ${t('size')} ${selectedSize.size} - ${t('final_price')} ${finalPrice} ${t('currency')} - ${t('phone')} ${phone}`;
+    if (discountInfo) msg += ` - ${t('discount_code')} ${discountInfo.promoCode}`;
     
     const whatsappNum = settings?.whatsapp || '201555590004';
     window.open(`https://wa.me/${whatsappNum}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -116,15 +116,14 @@ export default function Home() {
         <div className="header-inner">
             <a href="#" className="header-logo" >
                 <img src={logoImg} alt="فخم" />
-                <span className="header-logo-text">فخم</span>
             </a>
             <nav className="header-nav">
                 <a href="#hero" className="nav-link active">{t('home')}</a>
                 <a href="#products" className="nav-link">{t('perfumes')}</a>
                 <a href="#services" className="nav-link">{t('services')}</a>
                 <a href="#footer" className="nav-link">{t('contact')}</a>
-                <button className="nav-link" onClick={changeLanguage} style={{background:'transparent', border:'none', cursor:'pointer'}}>
-                  {lang === 'ar' ? 'English' : 'عربي'}
+                <button className="nav-link" onClick={changeLanguage} style={{background:'transparent', border:'none', cursor:'pointer', color:'var(--gold-dark)', marginInlineStart: '20px', fontWeight: 'bold'}}>
+                  {lang === 'ar' ? 'EN' : 'عربي'}
                 </button>
             </nav>
             <div>
@@ -146,7 +145,7 @@ export default function Home() {
           <a href="#products" onClick={() => setMobileMenuOpen(false)}>{t('perfumes')}</a>
           <a href="#services" onClick={() => setMobileMenuOpen(false)}>{t('services')}</a>
           <a href="#footer" onClick={() => setMobileMenuOpen(false)}>{t('contact')}</a>
-          <button onClick={() => {changeLanguage(); setMobileMenuOpen(false);}} style={{background:'transparent', border:'none', color:'var(--text-secondary)', fontSize:'1.05rem', fontWeight:'500', padding:'14px 0', borderBottom:'1px solid rgba(255,255,255,0.05)', display:'block', width:'100%', textAlign: isRTL ? 'right' : 'left', cursor:'pointer'}}>{lang === 'ar' ? 'English' : 'عربي'}</button>
+          <button onClick={() => {changeLanguage(); setMobileMenuOpen(false);}} style={{background:'transparent', border:'none', color:'var(--gold-dark)', fontSize:'1.05rem', fontWeight:'bold', padding:'14px 0', borderBottom:'1px solid rgba(255,255,255,0.05)', display:'block', width:'100%', textAlign: isRTL ? 'right' : 'left', cursor:'pointer'}}>{lang === 'ar' ? 'EN' : 'عربي'}</button>
       </div>
 
       {/* SEARCH OVERLAY */}
@@ -155,7 +154,7 @@ export default function Home() {
           <div className="search-container">
               <div className="search-input-wrapper">
                   <i className="fa-solid fa-magnifying-glass search-icon"></i>
-                  <input type="text" className="search-input" id="searchInput" placeholder="ابحث عن عطرك المفضل..."
+                  <input type="text" className="search-input" id="searchInput" placeholder={t('search_placeholder')}
                       autoComplete="off" />
               </div>
               <div className="search-results" id="searchResults"></div>
@@ -189,7 +188,7 @@ export default function Home() {
       <section className="products-section" id="products">
           <div className="section-title-wrapper animate-in">
               <span className="section-tag">{t('perfumes')}</span>
-              <h2 className="section-title">اكتشف مجموعتنا الحصرية من أرقى العطور الرجالية</h2>
+              <h2 className="section-title">{t('products_title')}</h2>
               <div className="section-divider"></div>
           </div>
           <div className="products-grid" id="productsGrid">
@@ -254,7 +253,7 @@ export default function Home() {
                   <div id="customArea"></div>
 
                   <div id="sizeOptions">
-                      <p className="modal-size-label">اختر الحجم</p>
+                      <p className="modal-size-label">{t('choose_size')}</p>
                       <div className="modal-size-options" id="sizeBtnContainer">
                         {selectedProduct.sizes?.map((size, idx) => (
                           <button 
@@ -269,7 +268,7 @@ export default function Home() {
                   </div>
 
                   <div className="modal-price-wrapper">
-                      <p className="modal-price-label">السعر</p>
+                      <p className="modal-price-label">{t('price')}</p>
                       <p id="modalPrice" className="modal-price">
                         {discountInfo ? (
                           <>
@@ -290,17 +289,17 @@ export default function Home() {
 
                   <div className="modal-phone-wrapper">
                       <i className="fa-solid fa-phone modal-phone-icon"></i>
-                      <input type="tel" id="phone" className="modal-phone" placeholder="رقم الهاتف للتواصل" maxLength="11" value={phone} onChange={e => setPhone(e.target.value)} />
+                      <input type="tel" id="phone" className="modal-phone" placeholder={t('phone_placeholder')} maxLength="11" value={phone} onChange={e => setPhone(e.target.value)} />
                   </div>
 
                   <button className="modal-order-btn" onClick={confirmOrder}>
                       <i className="fa-brands fa-whatsapp"></i>
-                      تأكيد الأوردر عبر واتساب
+                      {t('order_whatsapp')}
                   </button>
 
                   <div id="successMsg" className={`modal-success ${orderSuccess ? 'visible' : ''}`}>
                       <i className="fa-solid fa-circle-check"></i>
-                      تم تأكيد الأوردر بنجاح! سيتم تحويلك للواتساب
+                      {t('order_success')}
                   </div>
               </div>
           </div>
@@ -309,9 +308,9 @@ export default function Home() {
 
       {/* SOCIAL ACCOUNTS */}
       <section className="social-accounts-section animate-in">
-          <span className="section-tag">تابعنا</span>
-          <h2 className="section-title">حساباتنا</h2>
-          <p className="section-subtitle">تابعنا على منصات التواصل الاجتماعي</p>
+          <span className="section-tag">{t('follow_us')}</span>
+          <h2 className="section-title">{t('social_media')}</h2>
+          <p className="section-subtitle">{t('social_subtitle')}</p>
           <div className="section-divider"></div>
           <div className="social-accounts-icons">
               <a href={`https://wa.me/${settings?.whatsapp || '201555590004'}`} target="_blank" rel="noreferrer" className="whatsapp-icon" aria-label="واتساب"><i className="fa-brands fa-whatsapp"></i></a>
@@ -332,27 +331,27 @@ export default function Home() {
               </div>
 
               <div className="footer-section">
-                  <h3>روابط سريعة</h3>
+                  <h3>{t('quick_links')}</h3>
                   <ul className="footer-links">
-                      <li><a href="#hero"><i className="fa-solid fa-angle-left"></i> الرئيسية</a></li>
-                      <li><a href="#products"><i className="fa-solid fa-angle-left"></i> العطور</a></li>
-                      <li><a href="#services"><i className="fa-solid fa-angle-left"></i> خدماتنا</a></li>
+                      <li><a href="#hero"><i className="fa-solid fa-angle-left"></i> {t('home')}</a></li>
+                      <li><a href="#products"><i className="fa-solid fa-angle-left"></i> {t('perfumes')}</a></li>
+                      <li><a href="#services"><i className="fa-solid fa-angle-left"></i> {t('services')}</a></li>
                   </ul>
               </div>
 
               <div className="footer-section">
-                  <h3>تواصل معنا</h3>
+                  <h3>{t('contact')}</h3>
                   <div className="footer-contact-item">
                       <i className="fa-brands fa-whatsapp"></i>
                       <a href={`https://wa.me/${settings?.whatsapp || '201555590004'}`} target="_blank" rel="noreferrer">{settings?.whatsapp || '01555590004'}</a>
                   </div>
                   <div className="footer-contact-item">
                       <i className="fa-solid fa-clock"></i>
-                      <span>متاح 24 ساعة</span>
+                      <span>{t('available_24_7')}</span>
                   </div>
                   <div className="footer-contact-item">
                       <i className="fa-solid fa-truck-fast"></i>
-                      <span>توصيل لجميع المحافظات</span>
+                      <span>{t('delivery_all')}</span>
                   </div>
               </div>
           </div>
